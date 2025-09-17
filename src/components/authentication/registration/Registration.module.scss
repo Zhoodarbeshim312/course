@@ -1,0 +1,174 @@
+.Registration {
+  padding: 40px 0;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    h1 {
+      font-family: "Rubik", sans-serif;
+      font-weight: 500;
+      font-style: Medium;
+      font-size: clamp(1.563rem, 1.199rem + 1.82vw, 2.563rem);
+      line-height: 100%;
+    }
+    .forms {
+      display: flex;
+      flex-direction: column;
+      width: 400px;
+      gap: 20px;
+      @media (max-width: 450px) {
+        width: 270px;
+      }
+      button {
+        padding: 10px;
+        font-family: "Rubik", sans-serif;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 24px;
+        line-height: 100%;
+        background: #23a6f0;
+        color: white;
+        border-radius: 10px;
+        @media (max-width: 450px) {
+          font-size: 15.09px;
+        }
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        input {
+          font-family: "Rubik", sans-serif;
+          font-weight: 400;
+          font-style: Regular;
+          font-size: 16.74px;
+          line-height: 100%;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #00000066;
+        }
+        label {
+          cursor: pointer;
+          font-family: "Rubik", sans-serif;
+          font-weight: 400;
+          font-style: Regular;
+          font-size: 16.74px;
+          line-height: 100%;
+        }
+      }
+      .check {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        input {
+          display: none;
+        }
+        label {
+          font-family: Rubik;
+          font-weight: 400;
+          font-style: Regular;
+          font-size: 13.39px;
+          line-height: 100%;
+          position: relative;
+          padding-left: 30px;
+          cursor: pointer;
+          user-select: none;
+          &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: #ddd;
+            transition: background 0.3s;
+          }
+          &::after {
+            content: "✔";
+            position: absolute;
+            left: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+        }
+        input:checked + label::before {
+          background: #3498db;
+        }
+        input:checked + label::after {
+          opacity: 1;
+        }
+      }
+      .lines {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        h3 {
+          font-family: "Rubik", sans-serif;
+          font-weight: 500;
+          font-style: Medium;
+          font-size: 20.09px;
+          line-height: 100%;
+          color: #00000080;
+        }
+        .line {
+          border: 0.84px solid #00000080;
+          width: 100%;
+        }
+      }
+      .btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        @media (max-width: 450px) {
+          gap: 10px;
+        }
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          width: 100%;
+        }
+        .google {
+          border-radius: 5px;
+          background: white;
+          border: 1px solid #348bca;
+          color: black;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 500;
+          font-style: Medium;
+          font-size: 20.09px;
+          line-height: 25.53px;
+          @media (max-width: 450px) {
+            font-size: 15.09px;
+            padding: 5px;
+          }
+        }
+        .facebook {
+          border-radius: 5px;
+          background: white;
+          border: 1px solid #348bca;
+          color: black;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 500;
+          font-style: Medium;
+          font-size: 20.09px;
+          line-height: 25.53px;
+          @media (max-width: 450px) {
+            font-size: 15.09px;
+            padding: 5px;
+          }
+        }
+      }
+    }
+  }
+}
