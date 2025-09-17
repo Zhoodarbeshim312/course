@@ -4,11 +4,12 @@ import Header from "./components/layout/header/Header";
 import Main from "./components/pages/main/Main";
 import { Route, Routes } from "react-router-dom";
 import Landing from "./components/pages/landing/Landing";
+import Registration from "./components/authentication/registration/Registration";
 
 interface IRouter {
-	id: number
-	path: string
-	element: ReactElement
+  id: number;
+  path: string;
+  element: ReactElement;
 }
 const App = () => {
   const router: IRouter[] = [
@@ -19,8 +20,13 @@ const App = () => {
     },
     {
       id: 2,
-      path: "/about",
+      path: "/О нас",
       element: <Landing />,
+    },
+    {
+      id: 3,
+      path: "/registration",
+      element: <Registration />,
     },
   ];
   return (
@@ -36,4 +42,4 @@ const App = () => {
   );
 };
 
-export default App
+export default App;
