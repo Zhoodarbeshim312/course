@@ -1,9 +1,37 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import scss from "./Registration.module.scss";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa6";
-
+import { useAuth } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 const Registration: FC = () => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { register } = useAuth();
+  const [agree, setAgree] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const nav = useNavigate();
+  const handleRegister = async () => {
+    if (!agree) {
+      alert("Сначала согласитесь с условиями");
+      return;
+    }
+    setLoading(true);
+    try {
+      await register(email, password, name);
+      alert("Регистрация прошла успешно!");
+      nav("/");
+      setName("");
+      setEmail("");
+      setPassword("");
+    } catch (error: any) {
+      alert(`Ошибка регистрации: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className={scss.Registration}>
       <div className="container">
@@ -12,29 +40,46 @@ const Registration: FC = () => {
           <div className={scss.forms}>
             <div className={scss.form}>
               <label htmlFor="name">Имя</label>
-              <input id="name" type="text" placeholder="Введите свое имя" />
+              <input
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                id="name"
+                type="text"
+                placeholder="Введите свое имя"
+              />
             </div>
             <div className={scss.form}>
               <label htmlFor="address">Почта</label>
               <input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 id="address"
-                type="text"
+                type="email"
                 placeholder="Введите свою почту"
               />
             </div>
             <div className={scss.form}>
               <label htmlFor="password">Пароль*</label>
               <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 id="password"
-                type="text"
+                type="password"
                 placeholder="Введите свой пароль"
               />
             </div>
             <div className={scss.check}>
-              <input id="agree" type="checkbox" />
+              <input
+                id="agree"
+                type="checkbox"
+                checked={agree}
+                onChange={(e) => setAgree(e.target.checked)}
+              />
               <label htmlFor="agree">Согласен с Условиями</label>
             </div>
-            <button>Регистрация</button>
+            <button onClick={handleRegister} disabled={loading}>
+              {loading ? "Регистрация..." : "Регистрация"}
+            </button>
             <div className={scss.lines}>
               <div className={scss.line}></div>
               <h3>Или</h3>
