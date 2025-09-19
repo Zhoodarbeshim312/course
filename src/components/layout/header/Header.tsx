@@ -14,7 +14,6 @@ import loginImg from "../../../assets/images/signImg.svg";
 import { FcGoogle } from "react-icons/fc";
 import { CgClose } from "react-icons/cg";
 import { useAuth } from "../../../context/AuthContext";
-
 const Header = () => {
   const { signInWithGoogle, loginIn } = useAuth();
   const [email, setEmail] = useState<string>("");
@@ -32,7 +31,6 @@ const Header = () => {
       alert(`Ошибка выхода: ${error.message}`);
     }
   };
-
   const closeModal = (): void => {
     nav("registration");
     setModalLogin(false);
@@ -44,7 +42,6 @@ const Header = () => {
     }
     try {
       await loginIn(email, password);
-
       nav("/");
       setModalLogin(false);
       resetValue();
