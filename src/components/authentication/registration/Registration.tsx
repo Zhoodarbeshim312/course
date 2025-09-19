@@ -8,7 +8,7 @@ const Registration: FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { register } = useAuth();
+  const { register, signInWithGoogle, loginIn } = useAuth();
   const [agree, setAgree] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const nav = useNavigate();
@@ -20,7 +20,6 @@ const Registration: FC = () => {
     setLoading(true);
     try {
       await register(email, password, name);
-      alert("Регистрация прошла успешно!");
       nav("/");
       setName("");
       setEmail("");
@@ -86,7 +85,10 @@ const Registration: FC = () => {
               <div className={scss.line}></div>
             </div>
             <div className={scss.btns}>
-              <button className={scss.google}>
+              <button
+                onClick={() => signInWithGoogle()}
+                className={scss.google}
+              >
                 <FcGoogle />
                 Google
               </button>

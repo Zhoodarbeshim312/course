@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowRight, FaFacebook } from "react-icons/fa6";
 import scss from "./Header.module.scss";
 import { Spin as Hamburger } from "hamburger-react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -10,9 +10,17 @@ import { clearClient, setClient } from "../../../toolkit/clientSlice";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../toolkit";
 import { IoLogInOutline } from "react-icons/io5";
+import loginImg from "../../../assets/images/signImg.svg";
+import { FcGoogle } from "react-icons/fc";
+import { CgClose } from "react-icons/cg";
+import { useAuth } from "../../../context/AuthContext";
 
 const Header = () => {
+  const { signInWithGoogle, loginIn } = useAuth();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [isOpen, setOpen] = useState<boolean>(false);
+  const [modalLogin, setModalLogin] = useState<boolean>(false);
   const nav = useNavigate();
   const dispatch = useDispatch();
   const client = useSelector((state: RootState) => state.clientReducer.client);
@@ -20,12 +28,32 @@ const Header = () => {
     try {
       await signOut(auth);
       dispatch(clearClient());
-      nav("/");
     } catch (error: any) {
       alert(`Ошибка выхода: ${error.message}`);
     }
   };
 
+  const closeModal = (): void => {
+    nav("registration");
+    setModalLogin(false);
+  };
+  const handleLogin = async () => {
+    if (!email.trim() || !password.trim()) {
+      alert("Заполни");
+      return;
+    }
+    try {
+      await loginIn(email, password);
+
+      nav("/");
+      setModalLogin(false);
+      resetValue();
+    } catch (error) {}
+  };
+  const resetValue = () => {
+    setEmail("");
+    setPassword("");
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -99,7 +127,7 @@ const Header = () => {
               </button>
             ) : (
               <>
-                <Link to="/sign">Войти</Link>
+                <p onClick={() => setModalLogin(true)}>Войти</p>
                 <button onClick={() => nav("/registration")}>
                   Присоединяйся <FaArrowRight />
                 </button>
@@ -158,6 +186,60 @@ const Header = () => {
               Присоединяйся <FaArrowRight />
             </button>
           </>
+        </div>
+        <div
+          style={{
+            display: modalLogin ? "flex" : "none",
+          }}
+          className={scss.login}
+        >
+          <h4 onClick={() => setModalLogin(false)}>
+            <CgClose />
+          </h4>
+          <img src={loginImg} alt="img" />
+          <div className={scss.form}>
+            <h1>Добро пожаловать</h1>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Почта"
+            />
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="Пароль "
+            />
+            <a>Забыли пароль?</a>
+            <button onClick={() => handleLogin()}>Ввойти</button>
+            <p>
+              У вас нет аккаунта?
+              <span onClick={() => closeModal()}>Зарегистрироваться</span>
+            </p>
+            <div className={scss.lines}>
+              <div className={scss.line}></div>
+              <h3>Или</h3>
+              <div className={scss.line}></div>
+            </div>
+            <div className={scss.btns}>
+              <button
+                onClick={() => signInWithGoogle()}
+                className={scss.google}
+              >
+                <FcGoogle />
+                Google
+              </button>
+              <button className={scss.facebook}>
+                <FaFacebook
+                  style={{
+                    color: "#1877f2",
+                  }}
+                />
+                Fasebook
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
