@@ -57,7 +57,6 @@ const Header = () => {
     }
     try {
       await loginIn(email, password);
-
       nav("/");
       setModalLogin(false);
       resetValue();
