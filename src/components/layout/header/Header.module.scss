@@ -280,4 +280,116 @@
       }
     }
   }
+  .profile {
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    position: fixed;
+    background: white;
+    top: 0;
+    left: 0;
+    .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0;
+      background: white;
+      h1 {
+        cursor: pointer;
+        font-family: "Rubik", sans-serif;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 100%;
+      }
+      .icons {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        img {
+          width: 52px;
+          height: 52px;
+          object-fit: cover;
+          border-radius: 50px;
+        }
+        .bell {
+          cursor: pointer;
+          width: 52px;
+          height: 52px;
+          font-size: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px;
+          border-radius: 10px;
+          border: 1px solid #000000;
+        }
+      }
+    }
+    .view {
+      display: flex;
+      align-items: flex-start;
+      height: 100%;
+      .nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 80px;
+        padding: 40px;
+        height: 100%;
+        border-right: 1px solid #a09898;
+        .settings {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+          p {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #696969;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            font-style: Regular;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 2%;
+            span {
+              transition: 0.2s ease-in-out;
+              color: #696969;
+              cursor: pointer;
+              &:hover {
+                color: #499bfc;
+              }
+            }
+          }
+        }
+        .support {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+          p {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #696969;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            font-style: Regular;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 2%;
+            span {
+              color: #696969;
+              cursor: pointer;
+              transition: 0.2s ease-in-out;
+              &:hover {
+                color: #499bfc;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

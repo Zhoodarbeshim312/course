@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaArrowRight, FaFacebook } from "react-icons/fa6";
+import { FaArrowRight, FaEnvelope, FaFacebook, FaStar } from "react-icons/fa6";
 import scss from "./Header.module.scss";
 import { Spin as Hamburger } from "hamburger-react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -9,11 +9,17 @@ import { useDispatch } from "react-redux";
 import { clearClient, setClient } from "../../../toolkit/clientSlice";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../toolkit";
-import { IoLogInOutline } from "react-icons/io5";
+import { IoChatbubbleEllipses, IoHelpCircle } from "react-icons/io5";
 import loginImg from "../../../assets/images/signImg.svg";
 import { FcGoogle } from "react-icons/fc";
 import { CgClose } from "react-icons/cg";
 import { useAuth } from "../../../context/AuthContext";
+import { GoBell } from "react-icons/go";
+import profileIcon from "../../../assets/images/profileIcon.png";
+import { FaUserAlt, FaUserCircle } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
+import { MdOutlineLogout } from "react-icons/md";
+
 const Header = () => {
   const { signInWithGoogle, loginIn } = useAuth();
   const [email, setEmail] = useState<string>("");
@@ -22,15 +28,24 @@ const Header = () => {
   const [modalLogin, setModalLogin] = useState<boolean>(false);
   const nav = useNavigate();
   const dispatch = useDispatch();
+  const [profile, setProfile] = useState<boolean>(false);
   const client = useSelector((state: RootState) => state.clientReducer.client);
   const handleLogout = async () => {
     try {
       await signOut(auth);
       dispatch(clearClient());
+      setProfile(false);
     } catch (error: any) {
       alert(`Ошибка выхода: ${error.message}`);
     }
   };
+
+  const signGoogle = () => {
+    signInWithGoogle();
+    setModalLogin(false);
+    nav("/");
+  };
+
   const closeModal = (): void => {
     nav("registration");
     setModalLogin(false);
@@ -114,13 +129,8 @@ const Header = () => {
 
           <div className={scss.sign}>
             {client ? (
-              <button onClick={() => handleLogout()}>
-                {client.displayName}
-                <IoLogInOutline
-                  style={{
-                    fontSize: "20px",
-                  }}
-                />
+              <button onClick={() => setProfile(true)}>
+                <FaUserCircle />
               </button>
             ) : (
               <>
@@ -220,10 +230,7 @@ const Header = () => {
               <div className={scss.line}></div>
             </div>
             <div className={scss.btns}>
-              <button
-                onClick={() => signInWithGoogle()}
-                className={scss.google}
-              >
+              <button onClick={() => signGoogle()} className={scss.google}>
                 <FcGoogle />
                 Google
               </button>
@@ -235,6 +242,61 @@ const Header = () => {
                 />
                 Fasebook
               </button>
+            </div>
+          </div>
+        </div>
+        <div
+          style={{
+            display: profile ? "block" : "none",
+          }}
+          className={scss.profile}
+        >
+          <div className="container">
+            <div className={scss.head}>
+              <h1 onClick={() => setProfile(false)}>Logo</h1>
+              <div className={scss.icons}>
+                <div className={scss.bell}>
+                  <GoBell />
+                </div>
+                <img src={profileIcon} alt="img" />
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div className={scss.view}>
+            <div className={scss.nav}>
+              <div className={scss.settings}>
+                <p>
+                  <FaUserAlt />
+                  <span>Профиль</span>
+                </p>
+                <p>
+                  <IoChatbubbleEllipses />
+                  <span>Чат</span>
+                </p>
+                <p>
+                  <FaEnvelope />
+                  <span>Курсы</span>
+                </p>
+                <p>
+                  <FaStar />
+                  <span>Оценить</span>
+                </p>
+                <p>
+                  <IoMdSettings />
+                  <span>Настройки</span>
+                </p>
+              </div>
+              <div className={scss.support}>
+                <p>
+                  <IoHelpCircle />
+                  <span>Помощь</span>
+                </p>
+                <p onClick={() => handleLogout()}>
+                  <MdOutlineLogout />
+                  <span>Выйти</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
