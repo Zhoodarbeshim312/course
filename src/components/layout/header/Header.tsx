@@ -14,6 +14,7 @@ import loginImg from "../../../assets/images/signImg.svg";
 import { FcGoogle } from "react-icons/fc";
 import { CgClose } from "react-icons/cg";
 import { useAuth } from "../../../context/AuthContext";
+import { useModal } from "../../../store/useModal";
 const Header = () => {
   const { signInWithGoogle, loginIn } = useAuth();
   const [email, setEmail] = useState<string>("");
@@ -31,6 +32,7 @@ const Header = () => {
       alert(`Ошибка выхода: ${error.message}`);
     }
   };
+  const { openModal } = useModal();
   const closeModal = (): void => {
     nav("registration");
     setModalLogin(false);
@@ -114,7 +116,12 @@ const Header = () => {
 
           <div className={scss.sign}>
             {client ? (
-              <button onClick={() => handleLogout()}>
+              <button
+                onClick={() => {
+                  // handleLogout();
+                  openModal();
+                }}
+              >
                 {client.displayName}
                 <IoLogInOutline
                   style={{
