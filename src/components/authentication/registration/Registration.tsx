@@ -8,7 +8,7 @@ const Registration: FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { register, signInWithGoogle, loginIn } = useAuth();
+  const { register, signInWithGoogle } = useAuth();
   const [agree, setAgree] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const nav = useNavigate();
