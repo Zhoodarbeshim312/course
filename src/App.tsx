@@ -1,15 +1,14 @@
 import type { ReactElement } from "react";
 import Footer from "./components/layout/footer/Footer";
-import Header from "./components/layout/header/Header";
 import Main from "./components/pages/main/Main";
 import { Route, Routes } from "react-router-dom";
 import Landing from "./components/pages/landing/Landing";
 import Registration from "./components/authentication/registration/Registration";
-import { useModal } from "./store/useModal";
- 
-import { useModal } from "./store/useModal";
+
 import { AnimatePresence, motion } from "framer-motion";
 import ModalPage from "./components/pages/modalPage/ModalPage";
+import { useModal } from "./store/useModal";
+import Header from "./components/layout/header/Header";
 
 interface IRouter {
   id: number;
@@ -19,7 +18,6 @@ interface IRouter {
 
 const App = () => {
   const { modalBool } = useModal();
-
 
   const router: IRouter[] = [
     {
@@ -38,7 +36,6 @@ const App = () => {
       element: <Registration />,
     },
   ];
-
 
   return (
     <div className="app">

@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import scss from "./Founder.module.scss";
-import founder from "../../../../assets/images/ founder.png";
+import founder from "../../../../assets/images/founder.png";
 
 const Founder: FC = () => {
   return (
