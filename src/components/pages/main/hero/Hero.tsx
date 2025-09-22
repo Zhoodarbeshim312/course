@@ -3,7 +3,9 @@ import heroImg from "../../../../assets/images/heroImg.svg";
 import heroCardIcon1 from "../../../../assets/images/heroCardIcon1.svg";
 import heroCardIcon2 from "../../../../assets/images/heroCardIcon2.svg";
 import heroCardIcon3 from "../../../../assets/images/heroCardIcon3.svg";
+import { useModal } from "../../../../store/useModal";
 const Hero = () => {
+  const {openModal} = useModal()
   return (
     <section className={scss.Hero}>
       <div className="container">
@@ -16,7 +18,7 @@ const Hero = () => {
               Обеспечьте сеть для всех ваших потребностей легко и весело, <br />
               используя наши курсы.Откройте для себя интересные функции от нас.
             </p>
-            <button>Начать</button>
+            <button onClick={()=>openModal()}>Начать</button>
           </div>
           <div className={scss.img}>
             <img src={heroImg} alt="img" />
