@@ -1,16 +1,3 @@
-// import { create } from "zustand";
-
-// interface ModalState {
-//   modalBool: boolean;
-//   openModal: () => void;
-//   closeModal: () => void;
-// }
-
-// export const useModal = create<ModalState>((set) => ({
-//   modalBool: false,
-//   openModal: () => set({ modalBool: true  }),
-//   closeModal: () => set({ modalBool: false }),
-// }));
 import { create } from "zustand";
 
 interface ModalState {
