@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaArrowRight, FaEnvelope, FaFacebook, FaStar } from "react-icons/fa6";
+import {
+  FaArrowRight,
+  FaEnvelope,
+  FaFacebook,
+  FaStar,
+  FaVideo,
+} from "react-icons/fa6";
 import scss from "./Header.module.scss";
 import { Spin as Hamburger } from "hamburger-react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -9,18 +15,21 @@ import { useDispatch } from "react-redux";
 import { clearClient, setClient } from "../../../toolkit/clientSlice";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../toolkit";
-import { IoChatbubbleEllipses, IoHelpCircle } from "react-icons/io5";
+
 import loginImg from "../../../assets/images/signImg.svg";
 import { FcGoogle } from "react-icons/fc";
 import { CgClose } from "react-icons/cg";
 import { useAuth } from "../../../context/AuthContext";
-import { GoBell } from "react-icons/go";
-import profileIcon from "../../../assets/images/profileIcon.png";
-import { FaUserAlt, FaUserCircle } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
-import { MdOutlineLogout } from "react-icons/md";
-
+import { FaUserCircle } from "react-icons/fa";
+import { useModal } from "../../../store/useModal";
+import { AnimatePresence, motion } from "framer-motion";
+import ChatProfile from "../../pages/main/ChatProfile";
 const Header = () => {
+  const { modalBool, openModal, closeModal } = useModal();
+
+  console.log(modalBool);
+  
+
   const { signInWithGoogle, loginIn } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -46,10 +55,10 @@ const Header = () => {
     nav("/");
   };
 
-  const closeModal = (): void => {
-    nav("registration");
-    setModalLogin(false);
-  };
+  // const closeModal = (): void => {
+  //   nav("registration");
+  //   setModalLogin(false);
+  // };
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
       alert("Заполни");
@@ -88,7 +97,7 @@ const Header = () => {
     <section className={scss.Header}>
       <div className="container">
         <div className={scss.header}>
-          <h3 onClick={() => nav("/")}>Logo</h3>
+          <h3 onClick={() => closeModal()}>Logo</h3>
           <div className={scss.nav}>
             <NavLink
               to="/"
@@ -129,7 +138,7 @@ const Header = () => {
 
           <div className={scss.sign}>
             {client ? (
-              <button onClick={() => setProfile(true)}>
+              <button onClick={() => openModal()}>
                 <FaUserCircle />
               </button>
             ) : (
@@ -245,61 +254,21 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div
-          style={{
-            display: profile ? "block" : "none",
-          }}
-          className={scss.profile}
-        >
-          <div className="container">
-            <div className={scss.head}>
-              <h1 onClick={() => setProfile(false)}>Logo</h1>
-              <div className={scss.icons}>
-                <div className={scss.bell}>
-                  <GoBell />
-                </div>
-                <img src={profileIcon} alt="img" />
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className={scss.view}>
-            <div className={scss.nav}>
-              <div className={scss.settings}>
-                <p>
-                  <FaUserAlt />
-                  <span>Профиль</span>
-                </p>
-                <p>
-                  <IoChatbubbleEllipses />
-                  <span>Чат</span>
-                </p>
-                <p>
-                  <FaEnvelope />
-                  <span>Курсы</span>
-                </p>
-                <p>
-                  <FaStar />
-                  <span>Оценить</span>
-                </p>
-                <p>
-                  <IoMdSettings />
-                  <span>Настройки</span>
-                </p>
-              </div>
-              <div className={scss.support}>
-                <p>
-                  <IoHelpCircle />
-                  <span>Помощь</span>
-                </p>
-                <p onClick={() => handleLogout()}>
-                  <MdOutlineLogout />
-                  <span>Выйти</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+
+        <AnimatePresence mode="wait">
+          {modalBool ? (
+            <motion.div
+              key="modal"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <ChatProfile />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+        
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import scss from "./Founder.module.scss";
-import founder from "../../../../assets/images/ founder.png";
+// import founder from "../../../../assets/images/ founder.png";
 
 const Founder: FC = () => {
   return (
@@ -9,7 +9,7 @@ const Founder: FC = () => {
         <div className={scss.founder}>
           <h1>Наш основатель</h1>
           <div className={scss.img}>
-            <img src={founder} alt="img" />
+            {/* <img src={founder} alt="img" /> */}
             <p>
               Большая история — новое исследовательское направление, в рамках
               которого изучается единый преемственный процесс развития Вселенной
