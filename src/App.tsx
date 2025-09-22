@@ -5,7 +5,6 @@ import Main from "./components/pages/main/Main";
 import { Route, Routes } from "react-router-dom";
 import Landing from "./components/pages/landing/Landing";
 import Registration from "./components/authentication/registration/Registration";
-import { useModal } from "./store/useModal";
  
 interface IRouter {
   id: number;
