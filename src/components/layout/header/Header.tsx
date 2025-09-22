@@ -17,7 +17,6 @@ import { FaUserCircle } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import ChatProfile from "../../pages/main/ChatProfile";
 import { useModal } from "../../../store/useModal";
-import { IoLogInOutline } from "react-icons/io5";
 
 const Header = () => {
   const { modalBool, openModal, closeModal } = useModal();
@@ -51,7 +50,6 @@ const Header = () => {
     }
   };
 
-  // Очистка полей
   const resetValue = () => {
     setEmail("");
     setPassword("");
@@ -121,14 +119,6 @@ const Header = () => {
               <>
                 <button onClick={() => openModal()}>
                   <FaUserCircle />
-                </button>
-                <button
-                  onClick={() => {
-                    openModal();
-                  }}
-                >
-                  {client.displayName}
-                  <IoLogInOutline style={{ fontSize: "20px" }} />
                 </button>
               </>
             ) : (
