@@ -1,4 +1,3 @@
-import Courses from "../courses/Courses";
 import Hero from "./hero/Hero";
 import What from "./what/What";
 
@@ -7,7 +6,6 @@ const Main = () => {
     <div>
       <Hero />
       <What />
-      <Courses />
     </div>
   );
 };
