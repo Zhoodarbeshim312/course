@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Landing from "./components/pages/landing/Landing";
 import Registration from "./components/authentication/registration/Registration";
 import Header from "./components/layout/header/Header";
+import Courses from "./components/pages/courses/Courses";
 
 interface IRouter {
   id: number;
@@ -28,6 +29,11 @@ const App = () => {
       id: 3,
       path: "/registration",
       element: <Registration />,
+    },
+    {
+      id: 4,
+      path: "/курсы",
+      element: <Courses />,
     },
   ];
 
