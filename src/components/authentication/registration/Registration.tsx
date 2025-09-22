@@ -8,7 +8,7 @@ const Registration: FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { register, signInWithGoogle, loginIn } = useAuth();
+  const { register, signInWithGoogle } = useAuth();
   const [agree, setAgree] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const nav = useNavigate();
@@ -30,7 +30,10 @@ const Registration: FC = () => {
       setLoading(false);
     }
   };
-
+  const signGoogle = () => {
+    signInWithGoogle();
+    nav("/");
+  };
   return (
     <section className={scss.Registration}>
       <div className="container">
@@ -85,10 +88,7 @@ const Registration: FC = () => {
               <div className={scss.line}></div>
             </div>
             <div className={scss.btns}>
-              <button
-                onClick={() => signInWithGoogle()}
-                className={scss.google}
-              >
+              <button onClick={() => signGoogle()} className={scss.google}>
                 <FcGoogle />
                 Google
               </button>

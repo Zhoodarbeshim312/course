@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaArrowRight, FaFacebook } from "react-icons/fa6";
+import {
+  FaArrowRight,
+  FaEnvelope,
+  FaFacebook,
+  FaStar,
+  FaVideo,
+} from "react-icons/fa6";
 import scss from "./Header.module.scss";
 import { Spin as Hamburger } from "hamburger-react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -9,13 +15,22 @@ import { useDispatch } from "react-redux";
 import { clearClient, setClient } from "../../../toolkit/clientSlice";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../toolkit";
-import { IoLogInOutline } from "react-icons/io5";
+
 import loginImg from "../../../assets/images/signImg.svg";
 import { FcGoogle } from "react-icons/fc";
 import { CgClose } from "react-icons/cg";
 import { useAuth } from "../../../context/AuthContext";
+import { FaUserCircle } from "react-icons/fa";
+import { useModal } from "../../../store/useModal";
+import { AnimatePresence, motion } from "framer-motion";
+import ChatProfile from "../../pages/main/ChatProfile";
 import { useModal } from "../../../store/useModal";
 const Header = () => {
+  const { modalBool, openModal, closeModal } = useModal();
+
+  console.log(modalBool);
+  
+
   const { signInWithGoogle, loginIn } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -23,20 +38,31 @@ const Header = () => {
   const [modalLogin, setModalLogin] = useState<boolean>(false);
   const nav = useNavigate();
   const dispatch = useDispatch();
+  const [profile, setProfile] = useState<boolean>(false);
   const client = useSelector((state: RootState) => state.clientReducer.client);
   const handleLogout = async () => {
     try {
       await signOut(auth);
       dispatch(clearClient());
+      setProfile(false);
     } catch (error: any) {
       alert(`Ошибка выхода: ${error.message}`);
     }
   };
+
+  const signGoogle = () => {
+    signInWithGoogle();
   const { openModal } = useModal();
   const closeModal = (): void => {
     nav("registration");
     setModalLogin(false);
+    nav("/");
   };
+
+  // const closeModal = (): void => {
+  //   nav("registration");
+  //   setModalLogin(false);
+  // };
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
       alert("Заполни");
@@ -75,7 +101,7 @@ const Header = () => {
     <section className={scss.Header}>
       <div className="container">
         <div className={scss.header}>
-          <h3 onClick={() => nav("/")}>Logo</h3>
+          <h3 onClick={() => closeModal()}>Logo</h3>
           <div className={scss.nav}>
             <NavLink
               to="/"
@@ -116,6 +142,8 @@ const Header = () => {
 
           <div className={scss.sign}>
             {client ? (
+              <button onClick={() => openModal()}>
+                <FaUserCircle />
               <button
                 onClick={() => {
                   // handleLogout();
@@ -227,10 +255,7 @@ const Header = () => {
               <div className={scss.line}></div>
             </div>
             <div className={scss.btns}>
-              <button
-                onClick={() => signInWithGoogle()}
-                className={scss.google}
-              >
+              <button onClick={() => signGoogle()} className={scss.google}>
                 <FcGoogle />
                 Google
               </button>
@@ -245,6 +270,21 @@ const Header = () => {
             </div>
           </div>
         </div>
+
+        <AnimatePresence mode="wait">
+          {modalBool ? (
+            <motion.div
+              key="modal"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <ChatProfile />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+        
       </div>
     </section>
   );

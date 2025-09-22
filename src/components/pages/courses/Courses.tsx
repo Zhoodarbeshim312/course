@@ -1,11 +1,10 @@
 import type { FC } from "react";
 import { useState } from "react";
 import scss from "./Courses.module.scss";
-// import img from "../../../assets/img/man.svg";
-import img from '..//..//..//assets/images/man.svg'
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import img from "../../../assets/images/man.svg";
 import CardCourse from "../../ui/CardCourse";
 import Feedback from "../../ui/Feedback";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Courses: FC = () => {
   const [activeCategory, setActiveCategory] = useState("Все курсы");
