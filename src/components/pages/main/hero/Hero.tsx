@@ -1,71 +1,71 @@
 import scss from "./Hero.module.scss";
-import heroImg from "../../../../assets/images/heroImg.svg";
 import heroCardIcon1 from "../../../../assets/images/heroCardIcon1.svg";
 import heroCardIcon2 from "../../../../assets/images/heroCardIcon2.svg";
 import heroCardIcon3 from "../../../../assets/images/heroCardIcon3.svg";
 import { useModal } from "../../../../store/useModal";
 import axios from "axios";
 import { API_KEY } from "../../../../API";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+interface IHero {
+  title: string;
+  description: string;
+  image: string;
+}
+interface IHighlite {
+  id: number;
+  home: number;
+  title: string;
+  iconka: string;
+  description: string;
+}
 const Hero = () => {
   const { openModal } = useModal();
+  const [data, setData] = useState<IHero | null>(null);
+  const [dataHighlite, setDataHighlite] = useState<IHighlite[]>([]);
   const getHero = async () => {
-    let res = await axios.get(`${API_KEY}/home/`);
-    console.log(res);
+    let res = await axios.get<IHero[]>(`${API_KEY}/home/`);
+    setData(res.data[0]);
+  };
+  const getHighlite = async () => {
+    let res = await axios.get<IHighlite[]>(`${API_KEY}/Highlight/`);
+    setDataHighlite(res.data);
+    console.log(res.data);
   };
   useEffect(() => {
     getHero();
+    getHighlite();
   }, []);
   return (
     <section className={scss.Hero}>
       <div className="container">
         <div className={scss.hero}>
           <div className={scss.texts}>
-            <h1>
-              Надо много учиться, <br /> чтобы знать хоть немного.
-            </h1>
-            <p>
-              Обеспечьте сеть для всех ваших потребностей легко и весело, <br />
-              используя наши курсы.Откройте для себя интересные функции от нас.
-            </p>
+            <h1>{data?.title}</h1>
+            <p>{data?.description}</p>
             <button onClick={() => openModal()}>Начать</button>
           </div>
           <div className={scss.img}>
-            <img src={heroImg} alt="img" />
+            <img src={data?.image} alt="img" />
           </div>
         </div>
         <div className={scss.cards}>
           <div className={scss.card}>
             <img src={heroCardIcon1} alt="img" />
-            <h3>Пожизненный доступ</h3>
+            <h3>{dataHighlite[0]?.title}</h3>
             <div className={scss.line}></div>
-            <p>
-              Постепенное накопление <br />
-              информация об атомном и <br />
-              мелкомасштабное поведение...
-            </p>
+            <p>{dataHighlite[0]?.description}</p>
           </div>
           <div className={scss.card}>
             <img src={heroCardIcon2} alt="img" />
-            <h3>
-              Сертифицированный <br /> преподаватель
-            </h3>
+            <h3>{dataHighlite[1]?.title}</h3>
             <div className={scss.line}></div>
-            <p>
-              Постепенное накопление <br />
-              информация об атомном и <br />
-              мелкомасштабное поведение...
-            </p>
+            <p>{dataHighlite[1]?.description}</p>
           </div>
           <div className={scss.card}>
             <img src={heroCardIcon3} alt="img" />
-            <h3>Пожизненный доступ</h3>
+            <h3>{dataHighlite[2]?.title}</h3>
             <div className={scss.line}></div>
-            <p>
-              Постепенное накопление <br />
-              информация об атомном и <br />
-              мелкомасштабное поведение...
-            </p>
+            <p>{dataHighlite[2]?.description}</p>
           </div>
         </div>
       </div>
