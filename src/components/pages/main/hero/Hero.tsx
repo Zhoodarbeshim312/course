@@ -29,7 +29,6 @@ const Hero = () => {
   const getHighlite = async () => {
     let res = await axios.get<IHighlite[]>(`${API_KEY}/Highlight/`);
     setDataHighlite(res.data);
-    console.log(res.data);
   };
   useEffect(() => {
     getHero();
