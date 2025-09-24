@@ -5,10 +5,10 @@ import vector from "..//..//assets/images/vector.svg";
 import alarm from "..//..//assets/images/alarm.svg";
 
 interface CardCourseProps {
-  price: string;
+  price: number;
   title: string;
   description: string;
-  image: string;
+  course_img: string;
   duration: string;
   totalLessons: number;
   onLearnMore?: () => void;
@@ -18,7 +18,7 @@ const CardCourse: React.FC<CardCourseProps> = ({
   price,
   title,
   description,
-  image,
+  course_img,
   duration,
   totalLessons,
   onLearnMore,
@@ -26,7 +26,7 @@ const CardCourse: React.FC<CardCourseProps> = ({
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
-        <img src={image} alt={title} className={styles.image} />
+        <img src={course_img} alt={title} className={styles.image} />
         <div className={styles.price}>{price}</div>
         <button className={styles.favoriteBtn}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
