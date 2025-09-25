@@ -19,7 +19,7 @@ import ChatProfile from "../../pages/main/ChatProfile";
 import { useModal } from "../../../store/useModal";
 
 const Header = () => {
-  const { modalBool, openModal, closeModal } = useModal();
+  const { modalBool, openModal } = useModal();
   const { signInWithGoogle, loginIn } = useAuth();
 
   const [email, setEmail] = useState<string>("");
