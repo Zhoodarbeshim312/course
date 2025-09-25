@@ -1,3 +1,4 @@
+import Available from "./available/Available";
 import Hero from "./hero/Hero";
 import What from "./what/What";
 
@@ -6,6 +7,7 @@ const Main = () => {
     <div>
       <Hero />
       <What />
+      <Available />
     </div>
   );
 };

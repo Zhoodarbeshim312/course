@@ -77,7 +77,7 @@ const Header = () => {
     <section className={scss.Header}>
       <div className="container">
         <div className={scss.header}>
-          <h3 onClick={() => closeModal()}>Logo</h3>
+          <h3 onClick={() => nav("/")}>Logo</h3>
 
           <div className={scss.nav}>
             <NavLink
@@ -211,7 +211,9 @@ const Header = () => {
               <button onClick={handleLogin}>Войти</button>
               <p>
                 У вас нет аккаунта?
-                <span onClick={() => nav("/registration")}>
+                <span
+                  onClick={() => nav("/registration") || setModalLogin(false)}
+                >
                   Зарегистрироваться
                 </span>
               </p>
