@@ -26,6 +26,7 @@
       align-items: center;
       flex-wrap: wrap;
       justify-content: center;
+      gap: 40px;
       .card {
         width: 300px;
         border-radius: 10px;
@@ -64,6 +65,7 @@
             letter-spacing: 0.1px;
           }
           p {
+            margin: 0;
             text-align: left;
             font-family: "Montserrat", sans-serif;
             font-weight: 400;
