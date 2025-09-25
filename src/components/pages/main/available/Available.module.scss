@@ -1,0 +1,113 @@
+.Available {
+  padding: 40px 0;
+  .available {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      font-family: "Rubik", sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.563rem, 0.994rem + 2.84vw, 3.125rem);
+      line-height: 70px;
+      color: #0b132a;
+    }
+    p {
+      margin-bottom: 40px;
+      color: #4f5665;
+      font-family: "Rubik", sans-serif;
+      font-weight: 400;
+      font-size: clamp(0.625rem, 0.489rem + 0.68vw, 1rem);
+      line-height: 30px;
+      text-align: center;
+    }
+    .box {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      .card {
+        width: 300px;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: 0 0 10px 1px silver;
+        position: relative;
+        a {
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          padding: 1px 10px;
+          color: white;
+          border-radius: 5px;
+          background: #e74040;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 24px;
+          letter-spacing: 0.2px;
+        }
+        img {
+          border-radius: 10px 10px 0 0;
+          width: 100%;
+        }
+        .text {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px;
+          gap: 15px;
+          h3 {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0.1px;
+          }
+          p {
+            text-align: left;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0.2px;
+          }
+          button {
+            padding: 10px 30px;
+            border-radius: 50px;
+            border: 2px solid #23a6f0;
+            background: none;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 24px;
+            letter-spacing: 0.2px;
+            color: #23a6f0;
+          }
+          .icons {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            .iconText {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              img {
+                width: 16px;
+                height: 16px;
+              }
+              span {
+                color: #737373;
+                font-family: "Montserrat", sans-serif;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 16px;
+                letter-spacing: 0.2px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
