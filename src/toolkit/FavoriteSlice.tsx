@@ -1,34 +1,42 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface IProduct {
-  url: string;
-  name: string;
-  price: string;
+interface IAvailable {
+  id: number;
+  owner: number;
+  category: number;
+  title: string;
+  description: string;
+  course_img: string;
+  status_role: string;
+  time: string;
+  count_lessons: number;
+  price: number;
 }
 
 interface IInitial {
-  favorite: IProduct[];
+  favorite: IAvailable[];
 }
 
+const savedFavorites = localStorage.getItem("favorite");
+
 const initialState: IInitial = {
-  favorite: [],
+  favorite: savedFavorites ? JSON.parse(savedFavorites) : [],
 };
 
 export const favoriteSlice = createSlice({
   name: "FAVORITE",
   initialState,
   reducers: {
-    addToFavorite: (state, action: PayloadAction<IProduct>) => {
-      const exists = state.favorite.some(
-        (el) => el.price === action.payload.price
-      );
+    addToFavorite: (state, action: PayloadAction<IAvailable>) => {
+      const exists = state.favorite.some((el) => el.id === action.payload.id);
       if (!exists) {
         state.favorite.push(action.payload);
       } else {
         state.favorite = state.favorite.filter(
-          (el) => el.price !== action.payload.price
+          (el) => el.id !== action.payload.id
         );
       }
+      localStorage.setItem("favorite", JSON.stringify(state.favorite));
     },
   },
 });
