@@ -9,6 +9,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import axios from "axios";
 import { API_KEY } from "../../../../API";
 import { useEffect, useState } from "react";
+import { IoMdHeartEmpty } from "react-icons/io";
 interface IAvailable {
   owner: number;
   category: number;
@@ -44,6 +45,9 @@ const Available = () => {
             <div className={scss.card}>
               <a>{data.map((el) => el.status_role)}</a>
               <img src={ava1} alt="img" />
+              <h5>
+                <IoMdHeartEmpty />
+              </h5>
               <div className={scss.text}>
                 <h3>{data.map((el) => el.title)}</h3>
                 <p>{data.map((el) => el.description)}</p>
@@ -69,6 +73,9 @@ const Available = () => {
             <div className={scss.card}>
               <a>{data.map((el) => el.status_role)}</a>
               <img src={ava2} alt="img" />
+              <h5>
+                <IoMdHeartEmpty />
+              </h5>
               <div className={scss.text}>
                 <h3>{data.map((el) => el.title)}</h3>
                 <p>{data.map((el) => el.description)}</p>
@@ -83,6 +90,7 @@ const Available = () => {
                   </div>
                   <div className={scss.iconText}>
                     <img src={icon3} alt="img" />
+
                     <span>Прогресс</span>
                   </div>
                 </div>
@@ -94,6 +102,9 @@ const Available = () => {
             <div className={scss.card}>
               <a>{data.map((el) => el.status_role)}</a>
               <img src={ava3} alt="img" />
+              <h5>
+                <IoMdHeartEmpty />
+              </h5>
               <div className={scss.text}>
                 <h3>{data.map((el) => el.title)}</h3>
                 <p>{data.map((el) => el.description)}</p>
