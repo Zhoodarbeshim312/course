@@ -5,7 +5,7 @@ import axios from "axios";
 interface IABOUTUS {
   id: number;
   title: string;
-  authorBio: string | null; // иногда может быть null
+  authorBio: string | null;
   authorImage: string;
   titleAuthor: string;
 }
@@ -16,11 +16,17 @@ const Founder: FC = () => {
 
   const fetchAuthor = async () => {
     try {
-      const { data } = await axios.get<IABOUTUS[]>(
-        "http://13.221.23.81/ru/about_us/"
-      );
+      const { data } = await axios.get("http://13.221.23.81/ru/about_us/");
+
       if (Array.isArray(data)) {
-        setAuthor(data);
+        const normalized: IABOUTUS[] = data.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          authorBio: item.author_bio,
+          authorImage: item.author_image,
+          titleAuthor: item.title_author,
+        }));
+        setAuthor(normalized);
       } else {
         console.warn("Ответ не массив:", data);
       }
@@ -35,6 +41,11 @@ const Founder: FC = () => {
     fetchAuthor();
   }, []);
 
+  // Логи
+  useEffect(() => {
+    console.log("AUTHOR DATA (normalized):", author);
+  }, [author]);
+
   return (
     <section className={scss.Founder}>
       <div className="container">
@@ -46,9 +57,9 @@ const Founder: FC = () => {
               <h1>{item.titleAuthor}</h1>
               <div className={scss.img}>
                 <img src={item.authorImage} alt={item.titleAuthor} />
-                <p>{item.authorBio ? item.authorBio.slice(0, 200) : "loading"}</p>
+                <p>{item.authorBio?.slice(0, 200) ?? "Нет биографии"}</p>
               </div>
-              <p>{item.authorBio ? item.authorBio.slice(200) : "loading"}</p>
+              <p>{item.authorBio?.slice(200) ?? ""}</p>
             </div>
           ))
         ) : (
