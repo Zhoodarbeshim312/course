@@ -1,11 +1,12 @@
 import type { ReactElement } from "react";
 import Footer from "./components/layout/footer/Footer";
 import Main from "./components/pages/main/Main";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Landing from "./components/pages/landing/Landing";
 import Registration from "./components/authentication/registration/Registration";
 import Header from "./components/layout/header/Header";
 import Courses from "./components/pages/courses/Courses";
+import Inputs from "./components/ui/Inputs";
 
 interface IRouter {
   id: number;
@@ -35,7 +36,14 @@ const App = () => {
       path: "/курсы",
       element: <Courses />,
     },
+    {
+      id: 5,
+      path: "/детальная",
+      element: <div>Details Page</div>, 
+    },
   ];
+
+  const location = useLocation();
 
   return (
     <div className="app">
@@ -45,6 +53,7 @@ const App = () => {
           <Route path={el.path} element={el.element} key={el.id} />
         ))}
       </Routes>
+      {location.pathname !== "/детальная" && <Inputs />}
       <Footer />
     </div>
   );

@@ -33,7 +33,9 @@ const Header = () => {
 
   const signGoogle = () => {
     signInWithGoogle();
+     setModalLogin(false);
   };
+  console.log(modalBool);
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
