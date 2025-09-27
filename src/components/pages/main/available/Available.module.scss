@@ -33,6 +33,27 @@
         background: #ffffff;
         box-shadow: 0 0 10px 1px silver;
         position: relative;
+        h5 {
+          cursor: pointer;
+          right: 40%;
+          top: 42%;
+          position: absolute;
+          font-size: 30px;
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: white;
+          border-radius: 50px;
+          transition: 0.2s;
+          &:hover {
+            transform: scale(1.1);
+            color: red;
+          }
+          &:active {
+            transform: scale(1.2);
+          }
+        }
         a {
           position: absolute;
           top: 15px;
