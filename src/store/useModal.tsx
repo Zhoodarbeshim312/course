@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface ModalState {
   modalBool: boolean;
@@ -6,23 +7,16 @@ interface ModalState {
   closeModal: () => void;
 }
 
-const LOCAL_STORAGE_KEY = "modalBool";
-
-export const useModal = create<ModalState>((set) => {
-  const savedModalBool =
-    typeof window !== "undefined"
-      ? localStorage.getItem(LOCAL_STORAGE_KEY) === "true"
-      : false;
-
-  return {
-    modalBool: savedModalBool,
-    openModal: () => {
-      localStorage.setItem(LOCAL_STORAGE_KEY, "true");
-      set({ modalBool: true });
-    },
-    closeModal: () => {
-      localStorage.setItem(LOCAL_STORAGE_KEY, "false");
-      set({ modalBool: false });
-    },
-  };
-});
+export const useModal = create<ModalState>()(
+  persist(
+    (set) => ({
+      modalBool: false,
+      openModal: () => set({ modalBool: true }),
+      closeModal: () => set({ modalBool: false }),
+      
+    }),
+    {
+      name: "modalBool", // ключ в localStorage
+    }
+  )
+);

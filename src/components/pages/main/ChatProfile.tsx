@@ -23,7 +23,7 @@ import { GoBell } from "react-icons/go";
 import { useModal } from "../../../store/useModal";
 import styles from "./ChatProfile.module.scss";
 import UserProfile from "./UserProfile";
-
+import { useAuth } from "../../../context/AuthContext";
 type Message = {
   id: number;
   text: string;
@@ -41,7 +41,8 @@ type Chat = {
 };
 
 const ChatProfile = () => {
-  const { closeModal } = useModal();
+  const { logout } = useAuth();
+  const { modalBool, closeModal } = useModal();
   const [activeTab, setActiveTab] = useState<
     "profile" | "chats" | "courses" | "rate" | "settings"
   >("chats");
@@ -54,10 +55,15 @@ const ChatProfile = () => {
       id: 1,
       name: "Друзья навеки",
       avatar:
-        "https://img.freepik.com/premium-photo/group-people-jumping-sunset_777271-27830.jpg", 
+        "https://img.freepik.com/premium-photo/group-people-jumping-sunset_777271-27830.jpg",
       messages: [
         { id: 1, text: "Привет ребята!", sender: "other", time: "15:25" },
-        { id: 2, text: "Если вам надо фотки или данные поменять они в ChatProfile.tsx 52 строка", sender: "me", time: "15:25" }
+        {
+          id: 2,
+          text: "Если вам надо фотки или данные поменять они в ChatProfile.tsx 52 строка",
+          sender: "me",
+          time: "15:25",
+        },
       ],
       lastMessage: "Привет ребята!",
       lastTime: "Сегодня, 15:25",
@@ -120,10 +126,8 @@ const ChatProfile = () => {
       id: 7,
       name: "Бегимай",
       avatar: "https://randomuser.me/api/portraits/women/22.jpg",
-      messages: [
-        { id: 1, text: "я приеду сегодня", sender: "other", time: "12:22" },
-      ],
-      lastMessage: "я приеду сегодня",
+      messages: [{ id: 1, text: "я dasdad", sender: "other", time: "12:22" }],
+      lastMessage: "я dasdadя",
       lastTime: "Вчера, 12:22",
     },
   ]);
@@ -192,6 +196,15 @@ const ChatProfile = () => {
     if (isMobileView) setShowChatsList(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Ошибка при выходе:", error);
+    }
+  };
+  console.log(modalBool);
+
   return (
     <div className={styles.chatProfile}>
       {/* HEADER */}
@@ -205,9 +218,7 @@ const ChatProfile = () => {
               <FaBars />
             </button>
           )}
-          <h1 className={styles.logo} onClick={() => closeModal()}>
-            Logo
-          </h1>
+          <h1 className={styles.logo}>Logo</h1>
 
           {!isMobileView && (
             <div className={styles.search}>
@@ -263,14 +274,19 @@ const ChatProfile = () => {
             ))}
           </div>
           <div className={styles.footerNav}>
-            {[
-              { icon: IoHelpCircle, label: "Помощь" },
-              { icon: MdOutlineLogout, label: "Выйти" },
-            ].map(({ icon: Icon, label }) => (
-              <div key={label} className={styles.footerItem}>
-                <Icon size={16} /> {label}
-              </div>
-            ))}
+            <div key="Помощь" className={styles.footerItem}>
+              <IoHelpCircle size={16} /> Помощь
+            </div>
+            <div
+              onClick={() => {
+                handleLogout();
+                closeModal();
+              }}
+              key="Выйти"
+              className={styles.footerItem}
+            >
+              <MdOutlineLogout size={16} /> Выйти
+            </div>
           </div>
         </div>
 

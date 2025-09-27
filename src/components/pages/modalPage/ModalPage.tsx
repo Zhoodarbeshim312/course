@@ -9,17 +9,29 @@ import { IoMail } from "react-icons/io5";
 import { CiSettings, CiStar } from "react-icons/ci";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { useChat } from "../../../store/useChat";
+import { useAuth } from "../../../context/AuthContext";
 
 const ModalPage: FC = () => {
   const { closeModal } = useModal();
   const [messageText, setMessageText] = useState("");
-
   const { chats, activeChatId, setActiveChatId, sendMessage } = useChat();
+  const { logout } = useAuth();
+
   const activeChat = chats.find((c) => c.id === activeChatId)!;
 
   const handleSend = () => {
+    if (!messageText.trim()) return;
     sendMessage(messageText);
     setMessageText("");
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Ошибка при выходе:", error);
+    }
   };
 
   return (
@@ -60,7 +72,7 @@ const ModalPage: FC = () => {
             <h2>
               <AiFillQuestionCircle /> Помощь
             </h2>
-            <h2 onClick={closeModal}>
+            <h2 onClick={() => handleLogout()}>
               <IoIosLogOut /> Выйти
             </h2>
           </div>

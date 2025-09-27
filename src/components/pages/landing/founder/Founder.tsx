@@ -41,9 +41,9 @@ const Founder: FC = () => {
     fetchAuthor();
   }, []);
 
-  useEffect(() => {
-    console.log("AUTHOR DATA (normalized):", author);
-  }, [author]);
+  // useEffect(() => {
+  //   console.log("AUTHOR DATA (normalized):", author);
+  // }, [author]);
 
   return (
     <section className={scss.Founder}>
@@ -56,9 +56,9 @@ const Founder: FC = () => {
               <h1>{item.titleAuthor}</h1>
               <div className={scss.img}>
                 <img src={item.authorImage} alt={item.titleAuthor} />
-                <p>{item.authorBio?.slice(0, 200) ?? "Нет биографии"}</p>
+                <p>{item.authorBio?.slice(0, 620) ?? "Нет биографии"}</p>
               </div>
-              <p>{item.authorBio?.slice(200) ?? ""}</p>
+              <p>{item.authorBio?.slice(620) ?? ""}</p>
             </div>
           ))
         ) : (

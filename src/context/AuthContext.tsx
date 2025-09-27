@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
+  signOut,
 } from "firebase/auth";
 import { createContext, useContext, type FC, type ReactNode } from "react";
 import { auth } from "../faerBase";
@@ -12,6 +13,7 @@ interface IAuthContext {
   register: (email: string, password: string, name: string) => Promise<any>;
   signInWithGoogle: () => Promise<any>;
   loginIn: (email: string, password: string) => Promise<any>;
+  logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<IAuthContext | null>(null);
@@ -36,15 +38,24 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
     return userCredential;
   };
+
   const loginIn = (email: string, password: string) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const signInWithGoogle = () => {
     const providerGoogle = new GoogleAuthProvider();
     return signInWithPopup(auth, providerGoogle);
   };
+
+  const logout = () => {
+    return signOut(auth);
+  };
+
   return (
-    <AuthContext.Provider value={{ register, signInWithGoogle, loginIn }}>
+    <AuthContext.Provider
+      value={{ register, signInWithGoogle, loginIn, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
