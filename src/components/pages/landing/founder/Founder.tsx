@@ -30,8 +30,8 @@ const Founder: FC = () => {
       } else {
         console.warn("Ответ не массив:", data);
       }
-    } catch (e) {
-      console.error("Ошибка при загрузке:", e);
+    } catch (error) {
+      console.error("Ошибка при загрузке:", error);
     } finally {
       setLoading(false);
     }
@@ -41,7 +41,6 @@ const Founder: FC = () => {
     fetchAuthor();
   }, []);
 
-  // Логи
   useEffect(() => {
     console.log("AUTHOR DATA (normalized):", author);
   }, [author]);
