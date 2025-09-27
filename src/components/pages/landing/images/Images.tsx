@@ -1,19 +1,38 @@
-import type { FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import scss from "./Images.module.scss";
-import page1 from "../../../../assets/images/page1.png";
-import page2 from "../../../../assets/images/page2.png";
-import page3 from "../../../../assets/images/page3.png";
-import page4 from "../../../../assets/images/page4.png";
+import axios from "axios";
+
+interface AboutUsImage {
+  id: number;
+  about_us: number;
+  image: string;
+}
 
 const Images: FC = () => {
+  const [images, setImages] = useState<AboutUsImage[]>([]);
+  const fetchData = async (): Promise<AboutUsImage[] | void> => {
+    try {
+      const data = await axios.get<AboutUsImage[]>(
+        "http://13.221.23.81/ru/aboutus_images/"
+      );
+      setImages(data.data);
+      return data.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <section className={scss.Images}>
       <div className="container">
         <div className={scss.images}>
-          <img src={page1} alt="img" />
-          <img className={scss.img1} src={page2} alt="img" />
-          <img src={page3} alt="img" />
-          <img className={scss.img2} src={page4} alt="img" />
+          <img src={images[1]?.image} alt="img" />
+          <img className={scss.img1} src={images[1]?.image} alt="img" />
+          <img src={images[2]?.image} alt="img" />
+          <img className={scss.img2} src={images[3]?.image} alt="img" />
         </div>
       </div>
     </section>
