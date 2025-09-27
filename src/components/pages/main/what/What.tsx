@@ -27,12 +27,12 @@ const What = () => {
   const getwhoCourse = async () => {
     let res = await axios.get<IWhoCourse[]>(`${API_KEY}/who_course/`);
     setData(res.data[0]);
-    console.log(res.data[0]);
+    // console.log(res.data[0]);
   };
   const getWhoCourseHighle = async () => {
     let res = await axios.get<IWhoHighle[]>(`${API_KEY}/who_coursehighlight/`);
     setDataWho(res.data);
-    console.log(res.data);
+    // console.log(res.data);
   };
   useEffect(() => {
     getwhoCourse();
