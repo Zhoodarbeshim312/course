@@ -1,0 +1,36 @@
+.following {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%;
+  .followForm {
+    width: 100%;
+    position: relative;
+    button {
+      top: 1.5px;
+      background: #23a6f0;
+      color: white;
+      padding: 10px 40px;
+      border-radius: 3px;
+      font-family: "Montserrat", sans-serif;
+      right: 1.5px;
+      position: absolute;
+      font-weight: 400;
+      font-size: clamp(1rem, 0.881rem + 0.6vw, 1.327rem);
+      line-height: 42.48px;
+      letter-spacing: 0.3px;
+    }
+    input {
+      border: 1.52px solid #949494;
+      border-radius: 5px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 400;
+      font-size: clamp(1rem, 0.881rem + 0.6vw, 1.327rem);
+      line-height: 42.48px;
+      letter-spacing: 0.3px;
+      padding: 10px;
+      width: 100%;
+    }
+  }
+}
