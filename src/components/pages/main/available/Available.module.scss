@@ -28,6 +28,7 @@
       justify-content: center;
       gap: 40px;
       .card {
+        height: 515px;
         width: 300px;
         border-radius: 10px;
         background: #ffffff;
@@ -69,6 +70,8 @@
           letter-spacing: 0.2px;
         }
         img {
+          height: 274px;
+          object-fit: cover;
           border-radius: 10px 10px 0 0;
           width: 100%;
         }
@@ -132,6 +135,5 @@
         }
       }
     }
-
   }
 }
