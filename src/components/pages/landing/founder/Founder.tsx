@@ -1,40 +1,59 @@
-import type { FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import scss from "./Founder.module.scss";
-import founder from "../../../../assets/images/founder.png";
+import axios from "axios";
+
+interface IABOUTUS {
+  id: number;
+  title: string;
+  authorBio: string | null; // иногда может быть null
+  authorImage: string;
+  titleAuthor: string;
+}
 
 const Founder: FC = () => {
+  const [author, setAuthor] = useState<IABOUTUS[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchAuthor = async () => {
+    try {
+      const { data } = await axios.get<IABOUTUS[]>(
+        "http://13.221.23.81/ru/about_us/"
+      );
+      if (Array.isArray(data)) {
+        setAuthor(data);
+      } else {
+        console.warn("Ответ не массив:", data);
+      }
+    } catch (e) {
+      console.error("Ошибка при загрузке:", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAuthor();
+  }, []);
+
   return (
     <section className={scss.Founder}>
       <div className="container">
-        <div className={scss.founder}>
-          <h1>Наш основатель</h1>
-          <div className={scss.img}>
-            <img src={founder} alt="img" />
-            <p>
-              Большая история — новое исследовательское направление, в рамках
-              которого изучается единый преемственный процесс развития Вселенной
-              — с момента Большого взрыва до настоящего времени.
-              Междисциплинарный проект The Big History Project был основан
-              Биллом Гейтсом и Дэвидом Кристианом с целью разработки целостного
-              курса истории космоса, Земли, жизни и человечества и преподавания
-              его во всем мире.Эта книга, написанная на стыке естественных и
-              гуманитарных наук — физики, геологии, астрономии, истории,
-              .социологии и других, — насыщенное обобщение социологии и других,
-              — насыщенное обобщение новейших научных представлений
-            </p>
-          </div>
-          <p>
-            социологии и других, — насыщенное обобщение новейших научных
-            представлений Большая история — новое исследовательское направление,
-            в рамках которого изучается единый преемственный процесс развития
-            Вселенной — с момента Большого взрыва до настоящего времени.
-            Междисциплинарный проект The Big History Project был основан Биллом
-            Гейтсом и Дэвидом Кристианом с целью разработки целостного курса
-            истории космоса, Земли, жизни и человечества и преподавания его во
-            всем мире.Эта книга, написанная на стыке естественных и гуманитарных
-            наук — физики, геологии, астрономии, истории,
-          </p>
-        </div>
+        {loading ? (
+          <p>Загрузка...</p>
+        ) : author.length > 0 ? (
+          author.map((item) => (
+            <div key={item.id} className={scss.founder}>
+              <h1>{item.titleAuthor}</h1>
+              <div className={scss.img}>
+                <img src={item.authorImage} alt={item.titleAuthor} />
+                <p>{item.authorBio ? item.authorBio.slice(0, 200) : "loading"}</p>
+              </div>
+              <p>{item.authorBio ? item.authorBio.slice(200) : "loading"}</p>
+            </div>
+          ))
+        ) : (
+          <p>Данные об авторе не найдены</p>
+        )}
       </div>
     </section>
   );
