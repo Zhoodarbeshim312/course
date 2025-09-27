@@ -10,6 +10,7 @@ import axios from "axios";
 import { API_KEY } from "../../../../API";
 import { useEffect, useState } from "react";
 import { IoMdHeartEmpty } from "react-icons/io";
+import FollowFrom from "../../../ui/FollowFrom";
 interface IAvailable {
   owner: number;
   category: number;
@@ -128,6 +129,7 @@ const Available = () => {
               </div>
             </div>
           </div>
+          <FollowFrom />
         </div>
       </div>
     </section>
