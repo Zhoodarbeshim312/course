@@ -1,8 +1,7 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./UserProfile.module.scss";
 import axios from "axios";
 import CardCourse from "../../ui/CardCourse";
-import fone from "..//..//..//assets/images/foneuser.png";
 interface Course {
   id: number;
   title: string;

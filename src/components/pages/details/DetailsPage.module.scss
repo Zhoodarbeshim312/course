@@ -1,0 +1,359 @@
+.DetailsPage {
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 2rem 0;
+
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    padding: 0;
+
+    &_top {
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      background: #ffffff;
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #000000;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #666666;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+    }
+
+    &_middle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 3rem;
+      align-items: stretch;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .image_container {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+
+        .price_tag {
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          background: #ff4757;
+          color: white;
+          padding: 0.4rem 0.8rem;
+          font-size: 0.9rem;
+          font-weight: 600;
+          border-radius: 4px;
+          display: none;
+        }
+      }
+
+      .middle_text {
+        h2 {
+          color: #000000;
+          font-size: 2rem;
+          font-weight: 600;
+          margin: 2rem 0 1rem 0;
+
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+
+        p {
+          color: #333333;
+          line-height: 1.8;
+          font-size: 1rem;
+          margin-bottom: 1.5rem;
+
+          h2 {
+            display: inline;
+            color: #000000;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    > p:last-child {
+      padding: 0 3rem 3rem;
+      color: #333333;
+      line-height: 1.8;
+      font-size: 1rem;
+
+      @media (max-width: 768px) {
+        padding: 0 2rem 2rem;
+      }
+    }
+  }
+
+  .lessons {
+    background: #ffffff;
+    padding: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      padding: 2rem;
+    }
+
+    .box_lesson {
+      width: 100%;
+
+      .box {
+        margin-bottom: 1rem;
+        background: white;
+        border-top: 1px solid #e0e0e0;
+        border-bottom: 0, 8px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        &_top {
+          padding: 1.5rem 2rem;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: #ffffff;
+          border-bottom: 1px solid #f0f0f0;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: #f8f9fa;
+          }
+
+          h4 {
+            color: #000000;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+          }
+
+          .arrow {
+            font-size: 1.2rem;
+            color: #007bff;
+            transition: all 0.3s ease;
+
+            &.open {
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        &_in {
+          max-height: 0;
+          overflow: hidden;
+          transition: all 0.4s ease;
+          background: #ffffff;
+
+          &.visible {
+            max-height: 1000px;
+            padding: 2rem;
+          }
+
+          .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+
+            @media (max-width: 1024px) {
+              grid-template-columns: repeat(2, 1fr);
+            }
+
+            @media (max-width: 768px) {
+              grid-template-columns: 1fr;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.cardLesson {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cardImage {
+    position: relative;
+    overflow: hidden;
+    height: 160px;
+    background: #f5f5f5;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lockIcon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.8rem;
+      border-radius: 50%;
+      color: #007bff;
+      font-size: 1.2rem;
+    }
+
+    .time {
+      position: absolute;
+      bottom: 0.8rem;
+      left: 0.8rem;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+  }
+
+  .cardContent {
+    padding: 1rem;
+
+    .cardTitle {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-bottom: 0.3rem;
+    }
+
+    .cardDescription {
+      color: #000000;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin: 0;
+    }
+  }
+}
+
+// Container
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .DetailsPage {
+    .content {
+      &_middle {
+        grid-template-columns: 1fr;
+
+        img {
+          height: 250px;
+          position: static;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .DetailsPage {
+    padding: 1rem 0;
+
+    .hero {
+      margin: 0 1rem 1rem;
+    }
+
+    .content {
+      &_top {
+        padding: 2rem 1rem;
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+      }
+
+      &_middle {
+        padding: 1.5rem;
+        gap: 1.5rem;
+
+        img {
+          height: 200px;
+        }
+
+        .middle_text {
+          h2 {
+            font-size: 1.3rem;
+          }
+
+          p {
+            font-size: 0.95rem;
+          }
+        }
+      }
+
+      > p:last-child {
+        padding: 0 1.5rem 1.5rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    .lessons {
+      display: flex;
+      padding: 1.5rem;
+
+      .box_lesson .box {
+        &_top {
+          padding: 1rem 1.5rem;
+
+          h4 {
+            font-size: 1rem;
+          }
+        }
+
+        &_in.visible {
+          padding: 1.5rem;
+        }
+      }
+    }
+  }
+}

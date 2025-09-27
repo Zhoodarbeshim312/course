@@ -24,6 +24,7 @@ import { useModal } from "../../../store/useModal";
 import styles from "./ChatProfile.module.scss";
 import UserProfile from "./UserProfile";
 import { useAuth } from "../../../context/AuthContext";
+import Rate from "../../ui/Rate";
 type Message = {
   id: number;
   text: string;
@@ -289,7 +290,6 @@ const ChatProfile = () => {
             </div>
           </div>
         </div>
-
         {activeTab === "chats" && (
           <>
             {(!isMobileView || showChatsList) && (
@@ -377,6 +377,7 @@ const ChatProfile = () => {
           </>
         )}
         {activeTab === "profile" && <UserProfile />}
+        {activeTab === "rate" && <Rate />}
       </div>
     </div>
   );
