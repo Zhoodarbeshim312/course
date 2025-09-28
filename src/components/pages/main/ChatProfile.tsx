@@ -184,7 +184,6 @@ const ChatProfile = () => {
     );
     setInputMessage("");
   };
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -219,7 +218,9 @@ const ChatProfile = () => {
               <FaBars />
             </button>
           )}
-          <h1 className={styles.logo}>Logo</h1>
+          <h1 onClick={() => closeModal()} className={styles.logo}>
+            Logo
+          </h1>
 
           {!isMobileView && (
             <div className={styles.search}>
