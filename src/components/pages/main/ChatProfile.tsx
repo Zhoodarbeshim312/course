@@ -24,6 +24,7 @@ import { useModal } from "../../../store/useModal";
 import styles from "./ChatProfile.module.scss";
 import UserProfile from "./UserProfile";
 import { useAuth } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 type Message = {
   id: number;
   text: string;
@@ -183,7 +184,6 @@ const ChatProfile = () => {
     );
     setInputMessage("");
   };
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -218,7 +218,9 @@ const ChatProfile = () => {
               <FaBars />
             </button>
           )}
-          <h1 className={styles.logo}>Logo</h1>
+          <h1 onClick={() => closeModal()} className={styles.logo}>
+            Logo
+          </h1>
 
           {!isMobileView && (
             <div className={styles.search}>
