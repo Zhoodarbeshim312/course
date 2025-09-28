@@ -24,7 +24,6 @@ import { useModal } from "../../../store/useModal";
 import styles from "./ChatProfile.module.scss";
 import UserProfile from "./UserProfile";
 import { useAuth } from "../../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 type Message = {
   id: number;
   text: string;
