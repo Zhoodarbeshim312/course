@@ -5,27 +5,40 @@ import { IoIosPlayCircle } from "react-icons/io";
 
 interface ICart {
   id: number;
-  image: string;
-  time: string; 
+  owner: string;
+  time: string;
+  lesson: string;
+  course: string;
+  course_video: string;
   title: string;
-  description: string;
+  created_date: string;
 }
 
-const CardLesson: FC<ICart> = ({ id, image, time, title, description }) => {
+const CardLesson: FC<ICart> = ({
+  id,
+  course_video,
+  time,
+  title,
+  lesson,
+  course,
+}) => {
   return (
     <section className={scss.CardLesson}>
       <div className="container">
         <div className={scss.content}>
           <div
             className={scss.img_fone}
-            style={{ backgroundImage: `url(${image})` }}
+            style={{ backgroundImage: `url(${course_video})` }}
           >
             {id === 0 ? <IoIosPlayCircle /> : <FaLock />}
             <p>{time}</p>
           </div>
           <div className={scss.content_bottom}>
-            <h6>{title}</h6>
-            <p>{description}</p>
+            <h6>
+              {lesson}
+              {course}
+            </h6>
+            <p>{title}</p>
           </div>
         </div>
       </div>
