@@ -12,7 +12,6 @@ import { useChat } from "../../../store/useChat";
 import { useAuth } from "../../../context/AuthContext";
 
 const ModalPage: FC = () => {
-  const { closeModal } = useModal();
   const [messageText, setMessageText] = useState("");
   const { chats, activeChatId, setActiveChatId, sendMessage } = useChat();
   const { logout } = useAuth();
