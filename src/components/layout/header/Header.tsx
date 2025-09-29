@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaArrowRight, FaFacebook } from "react-icons/fa6";
 import scss from "./Header.module.scss";
 import { Spin as Hamburger } from "hamburger-react";
@@ -33,7 +33,7 @@ const Header = () => {
 
   const signGoogle = () => {
     signInWithGoogle();
-     setModalLogin(false);
+    setModalLogin(false);
   };
   console.log(modalBool);
 
@@ -179,10 +179,32 @@ const Header = () => {
             >
               Контакты
             </NavLink>
-            <Link to="/sign">Войти</Link>
-            <button onClick={() => nav("/registration")}>
-              Присоединяйся <FaArrowRight />
-            </button>
+            {client ? (
+              <>
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    openModal();
+                  }}
+                >
+                  <FaUserCircle />
+                </button>
+              </>
+            ) : (
+              <>
+                <p
+                  onClick={() => {
+                    setModalLogin(true);
+                    setOpen(false);
+                  }}
+                >
+                  Войти
+                </p>
+                <button onClick={() => nav("/registration")}>
+                  Присоединяйся <FaArrowRight />
+                </button>
+              </>
+            )}
           </div>
 
           <div

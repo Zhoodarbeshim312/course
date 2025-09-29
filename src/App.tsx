@@ -1,12 +1,11 @@
 import type { ReactElement } from "react";
 import Footer from "./components/layout/footer/Footer";
 import Main from "./components/pages/main/Main";
-import { Route, Routes, useLocation, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Landing from "./components/pages/landing/Landing";
 import Registration from "./components/authentication/registration/Registration";
 import Header from "./components/layout/header/Header";
 import Courses from "./components/pages/courses/Courses";
-import Inputs from "./components/ui/Inputs";
 import DetailsPage from "./components/pages/details/DetailsPage";
 
 interface IRouter {
@@ -39,12 +38,10 @@ const App = () => {
     },
     {
       id: 5,
-      path: "/details",
+      path: "/details/:",
       element: <DetailsPage />,
     },
   ];
-
-  const params = useParams();
 
   return (
     <div className="app">
@@ -54,7 +51,6 @@ const App = () => {
           <Route path={el.path} element={el.element} key={el.id} />
         ))}
       </Routes>
-      {params.id !== "/details" ? <Inputs /> : null}
       <Footer />
     </div>
   );
