@@ -37,7 +37,7 @@ type IVideoData = IVideo[];
 const DetailsPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const [data, setData] = useState<IData>([]);
-  const [video, setVideo] = useState<IVideoData>([]);
+  const [video, ] = useState<IVideoData>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   useEffect(() => {

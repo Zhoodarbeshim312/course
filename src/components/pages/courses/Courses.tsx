@@ -95,7 +95,7 @@ const Courses: FC = () => {
 
       if (response.data && Array.isArray(response.data)) {
         const transformedFeedbacks: FeedbackType[] = response.data.map(
-          (item, index) => ({
+          (item, ) => ({
             id: item.id,
             avatar: `https://i.pravatar.cc/100?img=${item.student}`,
             name: `Студент ${item.student}`,
