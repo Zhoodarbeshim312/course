@@ -16,31 +16,11 @@ interface IRouter {
 
 const App = () => {
   const router: IRouter[] = [
-    {
-      id: 1,
-      path: "/",
-      element: <Main />,
-    },
-    {
-      id: 2,
-      path: "/О нас",
-      element: <Landing />,
-    },
-    {
-      id: 3,
-      path: "/registration",
-      element: <Registration />,
-    },
-    {
-      id: 4,
-      path: "/курсы",
-      element: <Courses />,
-    },
-    {
-      id: 5,
-      path: "/details/:",
-      element: <DetailsPage />,
-    },
+    { id: 1, path: "/", element: <Main /> },
+    { id: 2, path: "/О нас", element: <Landing /> },
+    { id: 3, path: "/registration", element: <Registration /> },
+    { id: 4, path: "/курсы", element: <Courses /> },
+    { id: 5, path: "/details/:id", element: <DetailsPage /> }, // ✅ фикс
   ];
 
   return (
