@@ -1,5 +1,4 @@
 import scss from "./ModalPage.module.scss";
-import { useModal } from "../../../store/useModal";
 import type { FC } from "react";
 import { useState } from "react";
 import { IoIosLogOut, IoMdNotificationsOutline } from "react-icons/io";
