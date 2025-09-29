@@ -21,6 +21,17 @@ interface IObj {
 }
 type IData = IObj[];
 
+interface IVideo {
+  id: number;
+  owner: string;
+  time: string;
+  lesson: string;
+  course: string;
+  course_video: string;
+  title: string;
+  created_date: string;
+}
+type IVideoData = IVideo[];
 const DetailsPage: FC = () => {
   const [data, setData] = useState<IData>([
     {
@@ -45,7 +56,7 @@ const DetailsPage: FC = () => {
         "на будущее. В данном случае вы откладываете не такой процент, сколько вам лет, а процент, равный вычитанию возраста из 100. То есть если вам 30, то откладывайте 70% дохода. Очевидно, этот способ подойдёт только для тех, лишь малая доля дохода которых уже обеспечивает комфорт. Зато это неплохой задел на раннюю пенсию и безбедное детство детей. Хранить эти деньги стоит диверсифицированно. 10% сбережений оставляйте в национальной валюте вашей страны. 90 % распределите на 3 валюты: швейцарский франк, норвежская крона, и что-то из: американского доллара, евро либо йены. Рассмотрите варианты сбережений вгосударственных бумагах, фиксированных к инфляции.Эти рекомендации касаются личного бюджета. Ниже мы рассмотрим основные финансовые рискив бизнесе и стратегии управления ими",
     },
   ]);
-
+  const [video, setVideo] = useState<IVideoData>([]);
   const fetchData = async () => {
     try {
       const response = await axios.get("http://13.221.23.81/ru/lesson/");
@@ -55,49 +66,25 @@ const DetailsPage: FC = () => {
       console.error(e);
     }
   };
-
+  const FetchVideo = async () => {
+    try {
+      const data = await axios.get("http://13.221.23.81/ru/vidio/");
+      setVideo(data.data);
+      return data.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
   useEffect(() => {
     fetchData();
+    FetchVideo();
   }, []);
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(0); 
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   const handleToggle = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
-
-  const lessons = [
-    {
-      title: "Урок 1: Ознакомление",
-      cards: [
-        {
-          id: 0,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTpaEOwSfRrRONvWRZ_vgzOWZyFOxJJu7Tdg&s",
-          time: "1.23м",
-          title: "1. Ознакомление",
-          description: "Как ставить о оценивать задачи",
-        },
-        {
-          id: 1,
-          image: "path/to/image2.jpg",
-          time: "1.23м",
-          title: "1. Ознакомление",
-          description: "Как ставить о оценивать задачи",
-        },
-        {
-          id: 2,
-          image: "path/to/image3.jpg",
-          time: "1.23м",
-          title: "1. Ознакомление",
-          description: "Как ставить о оценивать задачи",
-        },
-      ],
-    },
-    { title: "Урок 2: Методы бизнеса", cards: [] },
-    { title: "Урок 3: Как начать зарабатывать больше", cards: [] },
-    { title: "Урок 4: Заключение", cards: [] },
-  ];
 
   return (
     <section className={scss.DetailsPage}>
@@ -134,13 +121,16 @@ const DetailsPage: FC = () => {
             </div>
             <div className={scss.lessons}>
               <div className={scss.box_lesson}>
-                {lessons.map((lesson, index) => (
+                {video.map((lesson, index) => (
                   <div key={index} className={scss.box}>
                     <div
                       className={scss.box_top}
                       onClick={() => handleToggle(index)}
                     >
-                      <h4>{lesson.title}</h4>
+                      <h4>
+                        {lesson.course}
+                        {lesson.lesson}
+                      </h4>
                       <IoIosArrowDropdown
                         className={`${scss.arrow} ${
                           activeIndex === index ? scss.open : ""
@@ -153,7 +143,7 @@ const DetailsPage: FC = () => {
                       }`}
                     >
                       <div className={scss.cards}>
-                        {lesson.cards.map((card, cardIdx) => (
+                        {video.map((card, cardIdx) => (
                           <CardLesson key={cardIdx} {...card} />
                         ))}
                       </div>

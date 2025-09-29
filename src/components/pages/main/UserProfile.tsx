@@ -70,17 +70,7 @@ const UserProfile: React.FC = () => {
       <div className={styles.cardsGrid}>
         {courses.map((card) => (
           <>
-            {" "}
-            <CardCourse
-              key={card.id}
-              price={card.price}
-              title={card.title}
-              description={card.description}
-              course_img={card.course_img}
-              duration={card.time}
-              totalLessons={card.count_lessons}
-              onLearnMore={() => console.log("Подробнее о курсе:", card.id)}
-            />{" "}
+           
             <CardCourse
               key={card.id}
               price={card.price}
