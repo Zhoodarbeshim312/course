@@ -17,7 +17,7 @@ interface Course {
 
 const UserProfile: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [user, setUser] = useState("Саша Петрова");
+  const [user] = useState("Саша Петрова");
 
   const fetchCourse = async () => {
     try {
@@ -70,7 +70,6 @@ const UserProfile: React.FC = () => {
       <div className={styles.cardsGrid}>
         {courses.map((card) => (
           <>
-           
             <CardCourse
               key={card.id}
               price={card.price}
