@@ -41,55 +41,56 @@ const Available = () => {
   console.log(data);
 
   return (
-    <section className={scss.Available}>
-      <div className="container">
-        <div className={scss.available}>
-          <h1>Доступные курсы</h1>
-          <p>
-            Мы предоставляем множество функций, которые вы можете <br />
-            использовать. Постепенное накопление информация
-          </p>
-          <div className={scss.box}>
-            {data.map((el) => (
-              <div key={el.id} className={scss.card}>
-                <a>{el.status_role}</a>
-                <img src={el.course_img || ava1} alt="img" />
-                <h5 onClick={() => favBtn(el)}>
-                  {favorite.some((f) => f.id === el.id) ? (
-                    <IoMdHeart color="red" size={24} />
-                  ) : (
-                    <IoMdHeartEmpty size={24} />
-                  )}
-                </h5>
-                <div className={scss.text}>
-                  <h3>{el.title}</h3>
-                  <p>{el.description}</p>
-                  <div className={scss.icons}>
-                    <div className={scss.iconText}>
-                      <img src={icon1} alt="img" />
-                      <span>{el.time.slice(0, 5)}</span>
+    <>
+      <section className={scss.Available}>
+        <div className="container">
+          <div className={scss.available}>
+            <h1>Доступные курсы</h1>
+            <p>
+              Мы предоставляем множество функций, которые вы можете <br />
+              использовать. Постепенное накопление информация
+            </p>
+            <div className={scss.box}>
+              {data.map((el) => (
+                <div key={el.id} className={scss.card}>
+                  <a>{el.status_role}</a>
+                  <img src={el.course_img || ava1} alt="img" />
+                  <h5 onClick={() => favBtn(el)}>
+                    {favorite.some((f) => f.id === el.id) ? (
+                      <IoMdHeart color="red" size={24} />
+                    ) : (
+                      <IoMdHeartEmpty size={24} />
+                    )}
+                  </h5>
+                  <div className={scss.text}>
+                    <h3>{el.title}</h3>
+                    <p>{el.description}</p>
+                    <div className={scss.icons}>
+                      <div className={scss.iconText}>
+                        <img src={icon1} alt="img" />
+                        <span>{el.time.slice(0, 5)}</span>
+                      </div>
+                      <div className={scss.iconText}>
+                        <img src={icon2} alt="img" />
+                        <span>{el.count_lessons} уроков</span>
+                      </div>
+                      <div className={scss.iconText}>
+                        <img src={icon3} alt="img" />
+                        <span>Прогресс</span>
+                      </div>
                     </div>
-                    <div className={scss.iconText}>
-                      <img src={icon2} alt="img" />
-                      <span>{el.count_lessons} уроков</span>
-                    </div>
-                    <div className={scss.iconText}>
-                      <img src={icon3} alt="img" />
-                      <span>Прогресс</span>
-                    </div>
+                    <button>
+                      Узнать больше <MdKeyboardArrowRight />
+                    </button>
                   </div>
-                  <button>
-                    Узнать больше <MdKeyboardArrowRight />
-                  </button>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <FollowFrom />
           </div>
-
-          <FollowFrom />
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
